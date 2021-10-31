@@ -1,12 +1,30 @@
-<h4 class="text-center">Login</h4>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form mt-4" [formGroup]="loginForm" (submit)="login()">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>User</mat-label>
+          <input matInput formControlName="user" required>
+          <mat-error *ngIf="loginForm.get('user')?.errors?.required && loginForm.get('user')?.touched">
+            User is required
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-<form class="form mt-4" (ngSubmit)="login()">
-  <div class="form-group">
-    <input type="text" class="form-control" [(ngModel)]="user" name="user" />
-  </div>
-  <div class="form-group">
-    <input type="password" class="form-control" [(ngModel)]="password" name="password" />
-  </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" />
+          <mat-error *ngIf="loginForm.get('password')?.errors?.required && loginForm.get('password')?.touched">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-  <button type="submit" class="btn btn-primary btn-block">Login</button>
-</form>
+      <button mat-raised-button color="primary" type="submit" >login</button>
+    </form>
+  </mat-card-content>
+</mat-card>
