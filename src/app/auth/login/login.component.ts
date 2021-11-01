@@ -31,19 +31,26 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    if (!this.loginForm.valid) {
+      this.snackBar.open('Form is not valid', 'ok', {
+        horizontalPosition: "center",
+        verticalPosition: "top",
+      });
+      return;
+    }
+
     this.authService
         .authenticate(
           this.loginForm.get('user')?.value,
           this.loginForm.get('password')?.value
         )
         .subscribe(()=>{
-          this.router.navigate(['home/dashboard'])
-        },(error) => {
-          this.snackBar.open('Erro on login', 'ok', {
+          this.router.navigate(['home/'])
+        },() => {
+          this.snackBar.open('Error login', 'ok', {
             horizontalPosition: "center",
             verticalPosition: "top",
           });
-          console.log(error);
         })
   }
 }
