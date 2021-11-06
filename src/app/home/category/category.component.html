@@ -3,8 +3,8 @@
     <mat-card-title>Categories</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div *ngIf="categories$ | async as categories">
-      <p *ngFor="let category of categories">{{category.name}}</p>
+    <div *ngIf="category$ | async as categories">
+      <p *ngFor="let category of categories.data">{{category.name}}</p>
     </div>
   </mat-card-content>
 </mat-card>

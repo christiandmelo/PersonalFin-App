@@ -1,7 +1,12 @@
 export interface Category {
-  id: number;
-  name: string;
-  shortName: string;
+  success: boolean,
+  page: number,
+  itemsPerPage: number,
+  data: Array <{
+    id: number;
+    name: string;
+    shortName: string;
+  }>
 }
 
-export type Categories = Array<Category>;
+//export type Categories = Array<Category>;
