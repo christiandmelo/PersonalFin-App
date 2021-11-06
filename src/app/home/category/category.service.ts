@@ -16,10 +16,6 @@ export class CategoryService {
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   getAll(page: number, itensPerPage: number): Observable<Categories>{
-    const token = this.tokenService.getToken();
-    const headers = new HttpHeaders().append('x-access-token', token);
-    return this.http.get<Categories>(`${API}/categories`,{
-      headers,
-    });
+    return this.http.get<Categories>(`${API}/categories`);
   }
 }
