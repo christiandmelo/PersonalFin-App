@@ -1,22 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from './category';
+import { ApiResultCategories, Category } from './category';
 import { CategoryService } from './category.service';
+
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })
-export class CategoryComponent implements OnInit {
-  category$ !: Observable<Category>;
+export class CategoryComponent implements OnInit, AfterViewInit  {
+  totalRows : number = 0;
+  isLoadingResults = true;
+  categoriesData !: ApiResultCategories;
+
+  displayedColumns: string[] = ['shortName', 'name', 'actions'];
+  dataSource !: MatTableDataSource<Category>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private categoryService: CategoryService
   ) { }
 
   ngOnInit(): void {
-    this.category$ = this.categoryService.getAll(10, 1);
+    this.categoryService
+      .getTotalRows()
+      .subscribe((rows) => {
+        this.totalRows = rows;
+      });
+
+    this.getCategoriesAndPutOnTable(0);
   }
 
+  ngAfterViewInit() {
+    //this.dataSource.paginator = this.paginator;
+    this.paginator.page
+        .pipe(
+            tap(() => this.getCategoriesAndPutOnTable(this.paginator.pageIndex))
+        )
+        .subscribe();
+  }
+
+  //#region Methods of get
+  getCategoriesAndPutOnTable(page: number){
+    this.isLoadingResults = true;
+    this.categoryService
+      .getAll(page)
+      .subscribe((dataCategories) => {
+        this.categoriesData = dataCategories;
+        this.dataSource = new MatTableDataSource<Category>(dataCategories.data);
+        this.isLoadingResults = false;
+      });
+  }
+  //#endregion
 }

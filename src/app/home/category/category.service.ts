@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { TokenService } from 'src/app/auth/token.service';
 import { environment } from 'src/environments/environment';
-import { Category } from './category';
+import { ApiResultCategories } from './category';
 
 const API = environment.apiURL;
 
@@ -15,7 +15,11 @@ export class CategoryService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-  getAll(page: number, itensPerPage: number): Observable<Category>{
-    return this.http.get<Category>(`${API}/categories`);
+  getTotalRows(): Observable<number>{
+    return this.http.get<number>(`${API}/category/totalRows`);
+  }
+
+  getAll(page: number): Observable<ApiResultCategories>{
+    return this.http.get<ApiResultCategories>(`${API}/categories?page=${page}`);
   }
 }
