@@ -15,6 +15,10 @@ export class CategoryService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
+  getTotalRows(): Observable<number>{
+    return this.http.get<number>(`${API}/category/totalRows`);
+  }
+
   getAll(page: number): Observable<ApiResultCategories>{
     return this.http.get<ApiResultCategories>(`${API}/categories?page=${page}`);
   }

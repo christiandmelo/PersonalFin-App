@@ -13,6 +13,8 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit, AfterViewInit  {
+  totalRows : number = 0;
+  isLoadingResults = true;
   categoriesData !: ApiResultCategories;
 
   displayedColumns: string[] = ['shortName', 'name', 'actions'];
@@ -24,6 +26,12 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   ) { }
 
   ngOnInit(): void {
+    this.categoryService
+      .getTotalRows()
+      .subscribe((rows) => {
+        this.totalRows = rows;
+      });
+
     this.getCategoriesAndPutOnTable(0);
   }
 
@@ -38,11 +46,13 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
 
   //#region Methods of get
   getCategoriesAndPutOnTable(page: number){
+    this.isLoadingResults = true;
     this.categoryService
       .getAll(page)
       .subscribe((dataCategories) => {
         this.categoriesData = dataCategories;
         this.dataSource = new MatTableDataSource<Category>(dataCategories.data);
+        this.isLoadingResults = false;
       });
   }
   //#endregion
