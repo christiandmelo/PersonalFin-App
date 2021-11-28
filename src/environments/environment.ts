@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiURL:'http://localhost/PersonalFin/public'
+  apiURL:'https://api-personal-fin.herokuapp.com/public'
 };

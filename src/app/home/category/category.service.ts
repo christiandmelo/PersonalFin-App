@@ -1,10 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { TokenService } from 'src/app/auth/token.service';
 import { environment } from 'src/environments/environment';
-import { ApiResultCategories } from './category';
+import { ApiResultCategories, Category } from './category';
 
 const API = environment.apiURL;
 
@@ -13,7 +12,7 @@ const API = environment.apiURL;
 })
 export class CategoryService {
 
-  constructor(private http: HttpClient, private tokenService: TokenService) { }
+  constructor(private http: HttpClient) { }
 
   getTotalRows(): Observable<number>{
     return this.http.get<number>(`${API}/category/totalRows`);
@@ -21,5 +20,12 @@ export class CategoryService {
 
   getAll(page: number): Observable<ApiResultCategories>{
     return this.http.get<ApiResultCategories>(`${API}/categories?page=${page}`);
+  }
+
+  save(name:string, shortName:string):Observable<Category>{
+    return this.http.post<Category>(`${API}/category`, {
+      name: name,
+      shortName : shortName
+    });
   }
 }

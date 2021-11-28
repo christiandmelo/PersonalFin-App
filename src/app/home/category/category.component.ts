@@ -5,7 +5,9 @@ import { CategoryService } from './category.service';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
+import { CategoryEditingComponent } from './category-editing/category-editing.component';
 
 @Component({
   selector: 'app-category',
@@ -22,6 +24,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
+    public dialog: MatDialog,
     private categoryService: CategoryService
   ) { }
 
@@ -42,6 +45,14 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
             tap(() => this.getCategoriesAndPutOnTable(this.paginator.pageIndex))
         )
         .subscribe();
+  }
+
+  newCategoryDialog() {
+    const dialogRef = this.dialog.open(CategoryEditingComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   //#region Methods of get

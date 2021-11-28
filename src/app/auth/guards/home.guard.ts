@@ -18,7 +18,7 @@ export class HomeGuard implements CanLoad {
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if(!this.userService.isLogged()){
-        this.router.navigate(['']);
+        //this.router.navigate(['']);
         return false;
       }
 
