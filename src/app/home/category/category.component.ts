@@ -47,7 +47,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
         .subscribe();
   }
 
-  openDialog() {
+  newCategoryDialog() {
     const dialogRef = this.dialog.open(CategoryEditingComponent);
 
     dialogRef.afterClosed().subscribe(result => {
