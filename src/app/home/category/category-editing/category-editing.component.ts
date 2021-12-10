@@ -58,23 +58,33 @@ export class CategoryEditingComponent implements OnInit {
   //#endregion
 
   //#region methods for edition
+  save(){
+    if(id <= 0){
+      this.saveNew();
+      return;
+    }
+
+    this.saveEdition();
+  }
+
   saveNew(){
     this.categoryService
-        .saveNew(
-          this.categoryForm.get('name')?.value,
-          this.categoryForm.get('shortName')?.value
-        )
-        .subscribe(()=>{
-          this.snackBar.open('Category saved successfully', 'ok', {
-            horizontalPosition: "center",
-            verticalPosition: "top",
-          });
-        },() => {
-          this.snackBar.open('Error saving', 'ok', {
-            horizontalPosition: "center",
-            verticalPosition: "top",
-          });
-        })
+      .saveNew(
+        this.categoryForm.get('name')?.value,
+        this.categoryForm.get('shortName')?.value
+      )
+      .subscribe(()=>{
+        this.snackBar.open('Category saved successfully', 'ok', {
+          horizontalPosition: "center",
+          verticalPosition: "top",
+        });
+        this.dialogRef.close();
+      },() => {
+        this.snackBar.open('Error saving', 'ok', {
+          horizontalPosition: "center",
+          verticalPosition: "top",
+        });
+      })
   }
 
   saveEdition(){
@@ -89,6 +99,7 @@ export class CategoryEditingComponent implements OnInit {
             horizontalPosition: "center",
             verticalPosition: "top",
           });
+          this.dialogRef.close();
         },() => {
           this.snackBar.open('Error saving', 'ok', {
             horizontalPosition: "center",

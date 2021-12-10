@@ -50,7 +50,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
     const dialogRef = this.dialog.open(CategoryEditingComponent, { data: id });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.getCategoriesAndPutOnTable(this.paginator.pageIndex);
     });
   }
 
