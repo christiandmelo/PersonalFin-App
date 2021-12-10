@@ -39,7 +39,6 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-    //this.dataSource.paginator = this.paginator;
     this.paginator.page
         .pipe(
             tap(() => this.getCategoriesAndPutOnTable(this.paginator.pageIndex))
@@ -47,8 +46,8 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
         .subscribe();
   }
 
-  newCategoryDialog() {
-    const dialogRef = this.dialog.open(CategoryEditingComponent);
+  editionCategoryDialog(id: number) {
+    const dialogRef = this.dialog.open(CategoryEditingComponent, { data: id });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

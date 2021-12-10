@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { ApiResultCategories, Category } from './category';
+import { ApiResultCategories, ApiResultCategory, Category } from './category';
 
 const API = environment.apiURL;
 
@@ -22,8 +22,19 @@ export class CategoryService {
     return this.http.get<ApiResultCategories>(`${API}/categories?page=${page}`);
   }
 
-  save(name:string, shortName:string):Observable<Category>{
+  getById(id: number): Observable<ApiResultCategory>{
+    return this.http.get<ApiResultCategory>(`${API}/category/${id}`);
+  }
+
+  saveNew(name:string, shortName:string):Observable<Category>{
     return this.http.post<Category>(`${API}/category`, {
+      name: name,
+      shortName : shortName
+    });
+  }
+
+  saveEdition(id:number, name:string, shortName:string):Observable<Category>{
+    return this.http.put<Category>(`${API}/category/${id}`, {
       name: name,
       shortName : shortName
     });
