@@ -5,8 +5,6 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { CategoryService } from '../category.service';
 
-let id: number = 0;
-
 @Component({
   selector: 'app-category-editing',
   templateUrl: './category-editing.component.html',
@@ -17,13 +15,11 @@ export class CategoryEditingComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CategoryEditingComponent>,
-    @Inject(MAT_DIALOG_DATA) public identifier: number,
+    @Inject(MAT_DIALOG_DATA) public id: number,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-  ) { 
-    id = identifier;
-  }
+  ) { }
 
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
@@ -40,7 +36,7 @@ export class CategoryEditingComponent implements OnInit {
 
   //#region methods for validation
   verifyIfInsertionOrEdition(){
-    if(id <= 0) return;
+    if(this.id <= 0) return;
 
     this.getCategoryAndPutOnInputs();
   }
@@ -49,7 +45,7 @@ export class CategoryEditingComponent implements OnInit {
   //#region methods for listing
   getCategoryAndPutOnInputs(){
     this.categoryService
-      .getById(id)
+      .getById(this.id)
       .subscribe((dataCategory) => {
         this.categoryForm.controls["name"].setValue(dataCategory.data.name);
         this.categoryForm.controls["shortName"].setValue(dataCategory.data.shortName);
@@ -59,7 +55,7 @@ export class CategoryEditingComponent implements OnInit {
 
   //#region methods for edition
   save(){
-    if(id <= 0){
+    if(this.id <= 0){
       this.saveNew();
       return;
     }
@@ -90,7 +86,7 @@ export class CategoryEditingComponent implements OnInit {
   saveEdition(){
     this.categoryService
         .saveEdition(
-          id,
+          this.id,
           this.categoryForm.get('name')?.value,
           this.categoryForm.get('shortName')?.value
         )

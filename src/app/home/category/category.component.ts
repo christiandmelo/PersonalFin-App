@@ -29,12 +29,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   ) { }
 
   ngOnInit(): void {
-    this.categoryService
-      .getTotalRows()
-      .subscribe((rows) => {
-        this.totalRows = rows;
-      });
-
+    this.getTotalRows();
     this.getCategoriesAndPutOnTable(0);
   }
 
@@ -50,11 +45,22 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
     const dialogRef = this.dialog.open(CategoryEditingComponent, { data: id });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getCategoriesAndPutOnTable(this.paginator.pageIndex);
+      console.log(result);
+      if(result != "")
+      this.getTotalRows();
+        this.getCategoriesAndPutOnTable(this.paginator.pageIndex);
     });
   }
 
   //#region Methods of get
+  getTotalRows(){
+    this.categoryService
+    .getTotalRows()
+    .subscribe((rows) => {
+      this.totalRows = rows;
+    });
+  }
+
   getCategoriesAndPutOnTable(page: number){
     this.isLoadingResults = true;
     this.categoryService
