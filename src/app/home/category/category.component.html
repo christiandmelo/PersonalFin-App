@@ -1,7 +1,10 @@
 <div>
   <div class="multi-toolbar">
     <div>
-      <button mat-button [matMenuTriggerFor]="menu" #menuTypeExpenses >Expenses Categories</button>
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu" #menuTypeExpenses>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+        Expenses Categories
+      </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>Expenses Categories</button>
         <button mat-menu-item>Incomes Categories</button>
