@@ -19,7 +19,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   isLoadingResults = true;
   categoriesData !: ApiResultCategories;
 
-  displayedColumns: string[] = ['shortName', 'name', 'actions'];
+  displayedColumns: string[] = ['name', 'icon', 'color', 'actions'];
   dataSource !: MatTableDataSource<Category>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
