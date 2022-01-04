@@ -17,6 +17,7 @@ import { CategoryEditingComponent } from './category-editing/category-editing.co
 export class CategoryComponent implements OnInit, AfterViewInit  {
   totalRows : number = 0;
   isLoadingResults = true;
+  type: number = 1;
   categoriesData !: ApiResultCategories;
 
   displayedColumns: string[] = ['name', 'icon', 'color', 'actions'];
@@ -42,7 +43,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   }
 
   editionCategoryDialog(id: number) {
-    const dialogRef = this.dialog.open(CategoryEditingComponent, { data: id });
+    const dialogRef = this.dialog.open(CategoryEditingComponent, { data: {id: id, type: this.type} });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
@@ -52,10 +53,19 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
     });
   }
 
+  //#region Methods of 
+  setTypeCategory(type: number){
+    this.type = type;
+
+    this.getTotalRows();
+    this.getCategoriesAndPutOnTable(0);
+  }
+  //#endregion
+
   //#region Methods of get
   getTotalRows(){
     this.categoryService
-    .getTotalRows()
+    .getTotalRows(this.type)
     .subscribe((rows) => {
       this.totalRows = rows;
     });
@@ -64,7 +74,7 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   getCategoriesAndPutOnTable(page: number){
     this.isLoadingResults = true;
     this.categoryService
-      .getAll(page)
+      .getAll(page, this.type)
       .subscribe((dataCategories) => {
         this.categoriesData = dataCategories;
         this.dataSource = new MatTableDataSource<Category>(dataCategories.data);

@@ -13,5 +13,7 @@ export interface ApiResultCategory {
 export interface Category {
   id: number;
   name: string;
-  shortName: string;
+  icon: string;
+  color: string;
+  type: number;
 };

@@ -11,16 +11,6 @@
       </mat-form-field>
     </div>
 
-    <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Short name</mat-label>
-        <input type="shortName" matInput formControlName="shortName" />
-        <mat-error *ngIf="categoryForm.get('shortName')?.errors?.required && categoryForm.get('shortName')?.touched">
-          Short name is required
-        </mat-error>
-      </mat-form-field>
-    </div>
-
     <div align="end">
       <button mat-button mat-dialog-close>Cancel</button>
       <button mat-raised-button color="primary" type="submit" >Save</button>

@@ -1,9 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { CategoryService } from '../category.service';
+
+export interface DialogData {
+  id: number;
+  type: number;
+}
 
 @Component({
   selector: 'app-category-editing',
@@ -15,7 +20,7 @@ export class CategoryEditingComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<CategoryEditingComponent>,
-    @Inject(MAT_DIALOG_DATA) public id: number,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
@@ -25,9 +30,6 @@ export class CategoryEditingComponent implements OnInit {
     this.categoryForm = this.formBuilder.group({
       name: ['', [
         Validators.required
-      ]],
-      shortName: ['', [
-        Validators.required
       ]]
     });
 
@@ -36,7 +38,7 @@ export class CategoryEditingComponent implements OnInit {
 
   //#region methods for validation
   verifyIfInsertionOrEdition(){
-    if(this.id <= 0) return;
+    if(this.data.id <= 0) return;
 
     this.getCategoryAndPutOnInputs();
   }
@@ -45,17 +47,16 @@ export class CategoryEditingComponent implements OnInit {
   //#region methods for listing
   getCategoryAndPutOnInputs(){
     this.categoryService
-      .getById(this.id)
+      .getById(this.data.id)
       .subscribe((dataCategory) => {
         this.categoryForm.controls["name"].setValue(dataCategory.data.name);
-        this.categoryForm.controls["shortName"].setValue(dataCategory.data.shortName);
       });
   }
   //#endregion
 
   //#region methods for edition
   save(){
-    if(this.id <= 0){
+    if(this.data.id <= 0){
       this.saveNew();
       return;
     }
@@ -67,7 +68,9 @@ export class CategoryEditingComponent implements OnInit {
     this.categoryService
       .saveNew(
         this.categoryForm.get('name')?.value,
-        this.categoryForm.get('shortName')?.value
+        '',
+        '',
+        this.data.type
       )
       .subscribe(()=>{
         this.snackBar.open('Category saved successfully', 'ok', {
@@ -75,8 +78,8 @@ export class CategoryEditingComponent implements OnInit {
           verticalPosition: "top",
         });
         this.dialogRef.close();
-      },() => {
-        this.snackBar.open('Error saving', 'ok', {
+      },(err) => {
+        this.snackBar.open('Error Saving: ' + err.error.data.message, 'ok', {
           horizontalPosition: "center",
           verticalPosition: "top",
         });
@@ -86,9 +89,11 @@ export class CategoryEditingComponent implements OnInit {
   saveEdition(){
     this.categoryService
         .saveEdition(
-          this.id,
+          this.data.id,
           this.categoryForm.get('name')?.value,
-          this.categoryForm.get('shortName')?.value
+          '',
+          '',
+          this.data.type
         )
         .subscribe(()=>{
           this.snackBar.open('Category saved successfully', 'ok', {
@@ -96,8 +101,8 @@ export class CategoryEditingComponent implements OnInit {
             verticalPosition: "top",
           });
           this.dialogRef.close();
-        },() => {
-          this.snackBar.open('Error saving', 'ok', {
+        },(err) => {
+          this.snackBar.open('Error saving: ' + err.error.data.message, 'ok', {
             horizontalPosition: "center",
             verticalPosition: "top",
           });
