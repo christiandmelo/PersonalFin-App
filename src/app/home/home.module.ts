@@ -14,8 +14,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { HomeRoutingModule } from './home-routing.module';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './home.component';
 import { HeaderModule } from '../components/header/header.module';
+
 import { CategoryComponent } from './category/category.component';
 import { CategoryEditingComponent } from './category/category-editing/category-editing.component';
 
@@ -23,6 +27,9 @@ import { CategoryEditingComponent } from './category/category-editing/category-e
 @NgModule({
   declarations: [
     HomeComponent,
+    SidebarComponent,
+    NavbarComponent,
+    FooterComponent,
     CategoryComponent,
     CategoryEditingComponent
   ],
