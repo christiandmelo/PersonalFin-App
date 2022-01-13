@@ -48,7 +48,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="register.html" class="nav-link">
+            <a class="nav-link" [routerLink]="'/auth/register'">
               <span class="nav-link-inner--text">Register</span>
             </a>
           </li>
@@ -167,7 +167,7 @@
               <a href="#" class="text-light"><small>Forgot password?</small></a>
             </div>
             <div class="col-6 text-right">
-              <a href="#" class="text-light"><small>Create new account</small></a>
+              <a class="text-light" [routerLink]="'/auth/register'" ><small>Create new account</small></a>
             </div>
           </div>
         </div>
