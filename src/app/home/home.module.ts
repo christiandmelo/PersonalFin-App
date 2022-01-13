@@ -22,6 +22,7 @@ import { HeaderModule } from '../components/header/header.module';
 
 import { CategoryComponent } from './category/category.component';
 import { CategoryEditingComponent } from './category/category-editing/category-editing.component';
+import { ProfileComponent } from './app/profile/profile.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CategoryEditingComponent } from './category/category-editing/category-e
     NavbarComponent,
     FooterComponent,
     CategoryComponent,
-    CategoryEditingComponent
+    CategoryEditingComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
