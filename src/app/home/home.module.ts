@@ -23,6 +23,7 @@ import { HeaderModule } from '../components/header/header.module';
 import { CategoryComponent } from './category/category.component';
 import { CategoryEditingComponent } from './category/category-editing/category-editing.component';
 import { ProfileComponent } from './app/profile/profile.component';
+import { LoadingModule } from '../components/loading/loading.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ProfileComponent } from './app/profile/profile.component';
     ReactiveFormsModule,
     HomeRoutingModule,
     HeaderModule,
+    LoadingModule,
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
