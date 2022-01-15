@@ -26,12 +26,9 @@ export class LoadingInterceptor implements HttpInterceptor{
             return next
                 .handle(req)
                 .pipe(tap(event => {
-                    console.log('abriu loading?');
                     if(event instanceof HttpResponse) {
-                        console.log('iniciando loading');
                         this.loadingService.stop();
                     } else {
-                        console.log('parando loading');
                         this.loadingService.start();
                     }
                 }))

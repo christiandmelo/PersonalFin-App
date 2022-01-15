@@ -1,12 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResultCategories, Category } from './category';
-import { CategoryService } from './category.service';
-
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { tap } from 'rxjs/operators';
+
+import { ApiResultCategories } from './category';
+import { CategoryService } from './category.service';
 import { CategoryEditingComponent } from './category-editing/category-editing.component';
 
 @Component({
@@ -14,14 +11,12 @@ import { CategoryEditingComponent } from './category-editing/category-editing.co
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })
-export class CategoryComponent implements OnInit, AfterViewInit  {
-  totalRows : number = 0;
+export class CategoryComponent implements OnInit  {
+  page : number = 0;
   type: number = 1;
-  categoriesData !: ApiResultCategories;
+  categories$ !: Observable<ApiResultCategories>;
 
-  displayedColumns: string[] = ['name', 'icon', 'color', 'actions'];
-  dataSource !: MatTableDataSource<Category>;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  displayedColumns: string[] = ['Icon', 'Name', 'Color', 'Actions'];
 
   constructor(
     public dialog: MatDialog,
@@ -29,54 +24,38 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   ) { }
 
   ngOnInit(): void {
-    this.getTotalRows();
-    this.getCategoriesAndPutOnTable(0);
-  }
-
-  ngAfterViewInit() {
-    this.paginator.page
-        .pipe(
-            tap(() => this.getCategoriesAndPutOnTable(this.paginator.pageIndex))
-        )
-        .subscribe();
+    this.getCategories(0);
   }
 
   editionCategoryDialog(id: number) {
     const dialogRef = this.dialog.open(CategoryEditingComponent, { data: {id: id, type: this.type} });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result != "")
-      this.getTotalRows();
-        this.getCategoriesAndPutOnTable(this.paginator.pageIndex);
+        this.getCategories(this.page);
     });
   }
 
   //#region Methods of 
   setTypeCategory(type: number){
     this.type = type;
-
-    this.getTotalRows();
-    this.getCategoriesAndPutOnTable(0);
+    this.getCategories(0);
   }
   //#endregion
 
   //#region Methods of get
-  getTotalRows(){
-    this.categoryService
-    .getTotalRows(this.type)
-    .subscribe((rows) => {
-      this.totalRows = rows;
-    });
+  getCategories(page: number){
+    this.categories$ = this.categoryService.getAll(page, this.type)
   }
 
-  getCategoriesAndPutOnTable(page: number){
-    this.categoryService
-      .getAll(page, this.type)
-      .subscribe((dataCategories) => {
-        this.categoriesData = dataCategories;
-        this.dataSource = new MatTableDataSource<Category>(dataCategories.data);
-      });
+  previousPage(){
+    this.page--;
+    this.getCategories(this.page);
+  }
+
+  nextPage(){
+    this.page++;
+    this.getCategories(this.page);
   }
   //#endregion
 }

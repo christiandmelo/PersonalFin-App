@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -45,10 +42,7 @@ import { FooterModule } from '../components/footer/footer.module';
     FooterModule,
     MatInputModule,
     MatFormFieldModule,
-    MatPaginatorModule,
     MatCardModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
     MatDialogModule,
     MatButtonModule,
     MatSnackBarModule,
