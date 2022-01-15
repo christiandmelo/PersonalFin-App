@@ -12,6 +12,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { RegisterComponent } from './register/register.component';
+import { FooterModule } from '../components/footer/footer.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
+    FooterModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,

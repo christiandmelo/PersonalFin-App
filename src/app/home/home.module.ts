@@ -16,7 +16,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './home.component';
 import { HeaderModule } from '../components/header/header.module';
 
@@ -24,6 +23,7 @@ import { CategoryComponent } from './category/category.component';
 import { CategoryEditingComponent } from './category/category-editing/category-editing.component';
 import { ProfileComponent } from './app/profile/profile.component';
 import { LoadingModule } from '../components/loading/loading.module';
+import { FooterModule } from '../components/footer/footer.module';
 
 
 @NgModule({
@@ -31,7 +31,6 @@ import { LoadingModule } from '../components/loading/loading.module';
     HomeComponent,
     SidebarComponent,
     NavbarComponent,
-    FooterComponent,
     CategoryComponent,
     CategoryEditingComponent,
     ProfileComponent
@@ -43,6 +42,7 @@ import { LoadingModule } from '../components/loading/loading.module';
     HomeRoutingModule,
     HeaderModule,
     LoadingModule,
+    FooterModule,
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
