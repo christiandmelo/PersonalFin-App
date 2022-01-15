@@ -16,7 +16,6 @@ import { CategoryEditingComponent } from './category-editing/category-editing.co
 })
 export class CategoryComponent implements OnInit, AfterViewInit  {
   totalRows : number = 0;
-  isLoadingResults = true;
   type: number = 1;
   categoriesData !: ApiResultCategories;
 
@@ -72,13 +71,11 @@ export class CategoryComponent implements OnInit, AfterViewInit  {
   }
 
   getCategoriesAndPutOnTable(page: number){
-    this.isLoadingResults = true;
     this.categoryService
       .getAll(page, this.type)
       .subscribe((dataCategories) => {
         this.categoriesData = dataCategories;
         this.dataSource = new MatTableDataSource<Category>(dataCategories.data);
-        this.isLoadingResults = false;
       });
   }
   //#endregion
