@@ -10,20 +10,30 @@ import { UserService } from 'src/app/auth/user/user.service';
 export class NavbarComponent {
 
   user$ = this.userService.getUser();
-  showMenu = "";
+  showProfileMenu = "";
+  showNotificationsMenu = "";
 
   constructor(
     private userService: UserService,
     private router: Router
   ) {  }
 
-  showOrHideMenu(){
-    if(this.showMenu == ""){
-      this.showMenu = "show";
+  showOrHideProfileMenu(){
+    if(this.showProfileMenu == ""){
+      this.showProfileMenu = "show";
       return;
     }
 
-    this.showMenu = "";
+    this.showProfileMenu = "";
+  }
+
+  showOrHideNotificationMenu(){
+    if(this.showNotificationsMenu == ""){
+      this.showNotificationsMenu = "show";
+      return;
+    }
+
+    this.showNotificationsMenu = "";
   }
 
   logout(){
