@@ -16,8 +16,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './home.component';
 import { HeaderModule } from '../components/header/header.module';
 
-import { CategoryComponent } from './category/category.component';
-import { CategoryEditingComponent } from './category/category-editing/category-editing.component';
+import { CategoryComponent } from './app/category/category.component';
+import { CategoryEditingComponent } from './app/category/category-editing/category-editing.component';
 import { ProfileComponent } from './app/profile/profile.component';
 import { LoadingModule } from '../components/loading/loading.module';
 import { FooterModule } from '../components/footer/footer.module';
