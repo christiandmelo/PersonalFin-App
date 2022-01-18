@@ -14,7 +14,6 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './home.component';
-import { HeaderModule } from '../components/header/header.module';
 
 import { CategoryComponent } from './app/category/category.component';
 import { CategoryEditingComponent } from './app/category/category-editing/category-editing.component';
@@ -37,7 +36,6 @@ import { FooterModule } from '../components/footer/footer.module';
     FormsModule,
     ReactiveFormsModule,
     HomeRoutingModule,
-    HeaderModule,
     LoadingModule,
     FooterModule,
     MatInputModule,
