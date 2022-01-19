@@ -21397,7 +21397,7 @@ textarea[resize='horizontal']
 .navbar-vertical .navbar-brand > img
 {
     max-width: 100%;
-    max-height: 2rem;
+    max-height: 70px;
 }
 @media (min-width: 768px)
 {
@@ -22209,13 +22209,13 @@ textarea[resize='horizontal']
     }
     .sidenav .sidenav-toggler
     {
-        padding: 1.5rem;
+        padding: 10px;
     }
 }
 .sidenav .navbar-brand,
 .sidenav .navbar-heading
 {
-    padding: 1.5rem;
+    padding: 10px
 }
 
 .sidenav-header
