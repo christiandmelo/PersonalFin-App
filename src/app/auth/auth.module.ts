@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { RegisterComponent } from './register/register.component';
 import { FooterModule } from '../components/footer/footer.module';
+import { LoadingModule } from '../components/loading/loading.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { FooterModule } from '../components/footer/footer.module';
     ReactiveFormsModule,
     AuthRoutingModule,
     FooterModule,
+    LoadingModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
