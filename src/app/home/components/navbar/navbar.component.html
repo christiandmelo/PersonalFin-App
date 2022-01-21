@@ -1,6 +1,15 @@
 <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button mat-raised-button color="basic" [matMenuTriggerFor]="menu" #menuTypeExpenses>
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          New &nbsp;
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item> <mat-icon class="red">trending_down</mat-icon> Expense &nbsp;&nbsp;&nbsp;</button>
+          <button mat-menu-item> <mat-icon class="green">trending_up</mat-icon> Income &nbsp;&nbsp;&nbsp;</button>
+          <button mat-menu-item> <mat-icon class="blue">swap_horiz</mat-icon> Transfer &nbsp;&nbsp;&nbsp;</button>
+        </mat-menu>
         <!-- Navbar links -->
         <ul class="navbar-nav align-items-center  ml-md-auto ">
           <li class="nav-item d-xl-none">
