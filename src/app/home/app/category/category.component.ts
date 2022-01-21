@@ -15,6 +15,8 @@ export class CategoryComponent implements OnInit  {
   page : number = 0;
   type: number = 1;
   categories$ !: Observable<ApiResultCategories>;
+  classBtnType = "btn-red";
+  textBtnType = "Expenses Categories";
 
   displayedColumns: string[] = ['Icon', 'Name', 'Color', 'Actions'];
 
@@ -38,6 +40,8 @@ export class CategoryComponent implements OnInit  {
 
   //#region Methods of 
   setTypeCategory(type: number){
+    this.classBtnType = (type==1) ? "btn-red" : "btn-green";
+    this.textBtnType = (type==1) ? "Expenses Categories" : "Incomes Categories";
     this.type = type;
     this.getCategories(0);
   }

@@ -4,9 +4,9 @@
     <div class="header-body">
       <div class="row align-items-center py-4">
         <div class="col-lg-6 col-7">
-          <button mat-raised-button color="primary" [matMenuTriggerFor]="menu" #menuTypeExpenses>
+          <button mat-raised-button class="btn-type" [ngClass]="classBtnType" [matMenuTriggerFor]="menu" #menuTypeExpenses>
             <mat-icon>keyboard_arrow_down</mat-icon>
-            Expenses Categories
+            {{textBtnType}}
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="setTypeCategory(1)">Expenses Categories</button>
