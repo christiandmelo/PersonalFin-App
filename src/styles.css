@@ -1,3 +1,7 @@
+:focus {
+    outline: 2px solid orange;
+}
+
 .red{
     color: red;
 }

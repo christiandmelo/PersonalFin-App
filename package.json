@@ -1,6 +1,6 @@
 {
-  "name": "personal-fin-app",
-  "version": "0.0.0",
+  "name": "finzee",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
