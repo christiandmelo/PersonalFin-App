@@ -20,6 +20,9 @@ import { CategoryEditingComponent } from './app/category/category-editing/catego
 import { ProfileComponent } from './app/profile/profile.component';
 import { LoadingModule } from '../components/loading/loading.module';
 import { FooterModule } from '../components/footer/footer.module';
+import { TransactionComponent } from './app/transaction/transaction.component';
+import { TransactionEditingComponent } from './app/transaction/transaction-editing/transaction-editing.component';
+import { TransactionTransferComponent } from './app/transaction/transaction-transfer/transaction-transfer.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { FooterModule } from '../components/footer/footer.module';
     NavbarComponent,
     CategoryComponent,
     CategoryEditingComponent,
-    ProfileComponent
+    ProfileComponent,
+    TransactionComponent,
+    TransactionEditingComponent,
+    TransactionTransferComponent
   ],
   imports: [
     CommonModule,

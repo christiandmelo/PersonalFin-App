@@ -1,0 +1,107 @@
+<!-- header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <button mat-raised-button class="btn-type" [ngClass]="classBtnType" [matMenuTriggerFor]="menu" #menuTypeExpenses>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+              {{textBtnType}}
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="setTypeCategory(1)">Expenses Categories</button>
+              <button mat-menu-item (click)="setTypeCategory(2)">Incomes Categories</button>
+            </mat-menu>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a class="btn btn-sm btn-neutral" (click)="editionCategoryDialog(0)">New</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Page content -->
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col">
+        <div class="card" >
+          <!-- Card header -->
+          <div class="card-header border-0">
+            <h3 class="mb-0">Transactions</h3>
+          </div>
+          <!-- Light table -->
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush" *ngIf="transactions$ | async as transactions; else emptyTable">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" class="sort" *ngFor="let column of displayedColumns" >{{column}}</th>
+                </tr>
+              </thead>
+              <tbody class="list">
+                <tr *ngFor="let transaction of transactions.data">
+                  <td>{{transaction.icon}}</td>
+                  <td>{{transaction.name}}</td>                
+                  <td>{{transaction.color}}</td>
+                  <td scope="row">
+                    <div class="media align-items-center">
+                      <a class="rounded-circle mr-3" (click)="editionCategoryDialog(transaction.id)">
+                        <img alt="Image placeholder" src="../../../../assets/img/edit.png">
+                      </a>
+                      <a class="rounded-circle mr-3">
+                        <img alt="Image placeholder" src="../../../../assets/img/delete.png">
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">
+                    <nav aria-label="...">
+                      <ul class="pagination justify-content-end mb-0">
+                        <li class="page-item" [ngClass]="{'disabled': transactions.page === 0}">
+                          <a class="page-link" (click)="previousPage()">
+                            <i class="fas fa-angle-left"></i>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                        </li>
+                        <li class="page-item active">
+                          <a class="page-link" href="#">{{transactions.page+1}}</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{'disabled': transactions.itemsPerPage < 10}">
+                          <a class="page-link" (click)="nextPage()">
+                            <i class="fas fa-angle-right"></i>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <!-- Empty table -->
+            <ng-template #emptyTable >
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" class="sort" *ngFor="let column of displayedColumns" >{{column}}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+                        <tr>
+                            <td colspan="7">You don't have transactions yet.</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr><td colspan="4"></td></tr>
+                    </tfoot>
+                </table>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

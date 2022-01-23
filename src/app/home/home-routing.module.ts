@@ -5,6 +5,7 @@ import { ProfileComponent } from './app/profile/profile.component';
 import { CategoryComponent } from './app/category/category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home.component';
+import { TransactionComponent } from './app/transaction/transaction.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'category',
         component: CategoryComponent,
+      },
+      {
+        path: 'transaction',
+        component: TransactionComponent,
       },
       {
         path: 'profile',

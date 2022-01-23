@@ -78,35 +78,25 @@ export class CategoryEditingComponent implements OnInit {
           verticalPosition: "top",
         });
         this.dialogRef.close();
-      },(err) => {
-        this.snackBar.open('Error Saving: ' + err.error.data.message, 'ok', {
-          horizontalPosition: "center",
-          verticalPosition: "top",
-        });
-      })
+      });
   }
 
   saveEdition(){
     this.categoryService
-        .saveEdition(
-          this.data.id,
-          this.categoryForm.get('name')?.value,
-          '',
-          '',
-          this.data.type
-        )
-        .subscribe(()=>{
-          this.snackBar.open('Category saved successfully', 'ok', {
-            horizontalPosition: "center",
-            verticalPosition: "top",
-          });
-          this.dialogRef.close();
-        },(err) => {
-          this.snackBar.open('Error saving: ' + err.error.data.message, 'ok', {
-            horizontalPosition: "center",
-            verticalPosition: "top",
-          });
-        })
+      .saveEdition(
+        this.data.id,
+        this.categoryForm.get('name')?.value,
+        '',
+        '',
+        this.data.type
+      )
+      .subscribe(()=>{
+        this.snackBar.open('Category saved successfully', 'ok', {
+          horizontalPosition: "center",
+          verticalPosition: "top",
+        });
+        this.dialogRef.close();
+      });
   }
   //#endregion
 
