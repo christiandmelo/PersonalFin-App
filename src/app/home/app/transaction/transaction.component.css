@@ -52,3 +52,17 @@ a {
   .blue{
       color: #2962ff;
   }
+
+  .month{
+    font-size: .875rem;
+    display: flex;
+    height: 36px;
+    margin: 0 3px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dee2e6;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+  }
