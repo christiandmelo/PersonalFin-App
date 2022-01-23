@@ -9,14 +9,103 @@
               {{textBtnType}}
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="setTypeCategory(1)">Expenses Categories</button>
-              <button mat-menu-item (click)="setTypeCategory(2)">Incomes Categories</button>
+              <button mat-menu-item (click)="setType(0)"> <mat-icon class="purple">attach_money</mat-icon> Transactions</button>
+              <button mat-menu-item (click)="setType(1)"> <mat-icon class="red">trending_down</mat-icon> Expenses</button>
+              <button mat-menu-item (click)="setType(2)"> <mat-icon class="green">trending_up</mat-icon> Incomes</button>
+              <button mat-menu-item (click)="setType(3)"> <mat-icon class="blue">swap_horiz</mat-icon> Transfers</button>
             </mat-menu>
           </div>
           <div class="col-lg-6 col-5 text-right">
             <a class="btn btn-sm btn-neutral" (click)="editionCategoryDialog(0)">New</a>
           </div>
         </div>
+        <!-- Card stats -->
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Current balance</h5>
+                      <span class="h2 font-weight-bold mb-0">R$ 59,622.10</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-indigo text-white rounded-circle shadow">
+                        <i class="ni ni-money-coins"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Incomes</h5>
+                      <span class="h2 font-weight-bold mb-0">R$ 6,668.53</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="ni ni-bold-up"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Expenses</h5>
+                      <span class="h2 font-weight-bold mb-0">R$ 4,118.79</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-bold-down"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Monthly balance</h5>
+                      <span class="h2 font-weight-bold mb-0">2,549.74</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                        <i class="ni ni-chart-bar-32"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-warning mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>

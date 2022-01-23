@@ -1,0 +1,54 @@
+a {
+    cursor: pointer;
+  }
+  
+  .btn-type{
+    font-size: 1rem;
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-transform: none;
+    height: 48px;
+    margin-left: 10px;
+    min-width: 180px;
+    transition: all 0.4s ease-in-out 0s;
+    border-radius: 25px;
+  }
+  
+  .btn-red{
+    background-color: rgb(211, 47, 47);
+    color: white;
+  }
+  
+  .btn-green{
+    background-color: rgb(56, 142, 60);
+    color: white;
+  }
+
+  .btn-purple{
+    background-color: #6515DD;
+    color: white;
+  }
+
+  .btn-blue{
+      background-color: #2962ff;
+      color: white;
+  }
+
+  .red{
+      color: rgb(211, 47, 47);
+  }
+
+  .green{
+      color: rgb(56, 142, 60);
+  }
+
+  .purple{
+    color: #6515DD;
+  }
+
+  .blue{
+      color: #2962ff;
+  }
