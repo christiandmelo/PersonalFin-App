@@ -14,10 +14,13 @@ export class TransactionComponent implements OnInit {
   transactions$ !: Observable<ApiResultTransactions>;
   page : number = 0;
   type: number = 0;  
+  date: Date = new Date();
   classBtnType = "btn-purple";
   textBtnType = "Transactions";
+  textBtnButton = "";
 
   displayedColumns: string[] = ['Status', 'Date', 'Description', 'Category', 'Account', 'Amount', 'Actions'];
+  monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
   constructor(
     public dialog: MatDialog,
@@ -26,6 +29,7 @@ export class TransactionComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTransactions(0);
+    this.setMonth(0);
   }
 
   //#region Methods of actions on screen
@@ -53,6 +57,11 @@ export class TransactionComponent implements OnInit {
         break;
     }
     this.getTransactions(0);
+  }
+
+  setMonth(direction:number){ 
+    this.date.setMonth(this.date.getMonth() + direction);
+    this.textBtnButton = this.monthNames[this.date.getMonth()] + " " +this.date.getFullYear().toString();
   }
   //#endregion
 
