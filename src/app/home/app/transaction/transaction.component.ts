@@ -52,7 +52,7 @@ export class TransactionComponent implements OnInit {
       default:
         break;
     }
-    //this.getCategories(0);
+    this.getTransactions(0);
   }
   //#endregion
 
