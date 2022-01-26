@@ -154,16 +154,21 @@
               </thead>
               <tbody class="list">
                 <tr *ngFor="let transaction of transactions.data">
-                  <td>{{transaction.icon}}</td>
-                  <td>{{transaction.name}}</td>                
-                  <td>{{transaction.color}}</td>
+                  <td>{{transaction.statusId}}</td>
+                  <td>{{transaction.issuanceDate | date:'dd/MM/YYYY'}}</td>
+                  <td></td>
+                  <td>{{transaction.categoryId}}</td>
+                  <td>{{transaction.bankAccountId}}</td>            
+                  <td [ngClass]="{'red': transaction.typeEntry === 1, 'green': transaction.typeEntry === 2}" >
+                    {{transaction.amount}}
+                  </td>
                   <td scope="row">
                     <div class="media align-items-center">
                       <a class="rounded-circle mr-3" (click)="editionCategoryDialog(transaction.id)">
-                        <img alt="Image placeholder" src="../../../../assets/img/edit.png">
+                        <img alt="Edit" src="../../../../assets/img/edit.png">
                       </a>
                       <a class="rounded-circle mr-3">
-                        <img alt="Image placeholder" src="../../../../assets/img/delete.png">
+                        <img alt="Delete" src="../../../../assets/img/delete.png">
                       </a>
                     </div>
                   </td>
@@ -171,7 +176,7 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <td colspan="4">
+                  <td colspan="7">
                     <nav aria-label="...">
                       <ul class="pagination justify-content-end mb-0">
                         <li class="page-item" [ngClass]="{'disabled': transactions.page === 0}">
@@ -181,9 +186,9 @@
                           </a>
                         </li>
                         <li class="page-item active">
-                          <a class="page-link" href="#">{{transactions.page+1}}</a>
+                          <span class="page-link">{{transactions.page+1}}</span>
                         </li>
-                        <li class="page-item" [ngClass]="{'disabled': transactions.itemsPerPage < 10}">
+                        <li class="page-item" [ngClass]="{'disabled': transactions.data.length < transactions.itemsPerPage}">
                           <a class="page-link" (click)="nextPage()">
                             <i class="fas fa-angle-right"></i>
                             <span class="sr-only">Next</span>
@@ -205,12 +210,10 @@
                         </tr>
                     </thead>
                     <tbody class="list">
-                        <tr>
-                            <td colspan="7">You don't have transactions yet.</td>
-                        </tr>
+                        <tr><td colspan="7">...</td></tr>
                     </tbody>
                     <tfoot>
-                        <tr><td colspan="4"></td></tr>
+                        <tr><td colspan="7"></td></tr>
                     </tfoot>
                 </table>
             </ng-template>
