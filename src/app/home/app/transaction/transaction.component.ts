@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 import { ApiResultTransactions } from './transaction';
 import { TransactionService } from './transaction.service';
@@ -61,7 +62,12 @@ export class TransactionComponent implements OnInit {
 
   setMonth(direction:number){ 
     this.date.setMonth(this.date.getMonth() + direction);
-    this.textBtnButton = this.monthNames[this.date.getMonth()] + " " +this.date.getFullYear().toString();
+    this.textBtnButton = this.monthNames[this.date.getMonth()] + " " + this.date.getFullYear().toString();
+  }
+
+  changeMonth(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.date = (event.value === null) ? this.date : event.value;
+    this.setMonth(0);
   }
   //#endregion
 

@@ -57,13 +57,26 @@ a {
     font-size: .875rem;
     display: flex;
     height: 36px;
-    width: 142px;
+    width: 143px;
     margin: 0 3px;
     align-items: center;
     justify-content: center;
-    display: flex;
+    text-align: center;
     flex-direction: row;
     border: 1px solid #dee2e6;
-    border-radius: 50px;
+    border-radius: 15px;
     padding: 0.5rem 1rem;
+    position: absolute;
+  }
+
+  .agroupMonth{
+    width: 180px;
+  }
+
+  .datePickerMonth{
+    float: right;
+  }
+
+  .inputDatePickMonth{
+    color: transparent;
   }

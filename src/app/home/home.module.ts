@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -46,6 +48,8 @@ import { TransactionTransferComponent } from './app/transaction/transaction-tran
     FooterModule,
     MatInputModule,
     MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
