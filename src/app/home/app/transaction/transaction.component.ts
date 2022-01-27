@@ -5,6 +5,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 import { ApiResultTransactions } from './transaction';
 import { TransactionService } from './transaction.service';
+import { TransactionEditingComponent } from './transaction-editing/transaction-editing.component';
 
 @Component({
   selector: 'app-transaction',
@@ -31,6 +32,16 @@ export class TransactionComponent implements OnInit {
   ngOnInit(): void {
     this.getTransactions(0);
     this.setMonth(0);
+  }
+
+  //#region Methods of dialog
+  editionTransactionDialog(id: number) {
+    const dialogRef = this.dialog.open(TransactionEditingComponent, { data: {id: id, type: this.type} });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != "")
+        this.getTransactions(this.page);
+    });
   }
 
   //#region Methods of actions on screen
