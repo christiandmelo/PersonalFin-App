@@ -48,7 +48,10 @@ export class TransactionEditingComponent implements OnInit {
       ]],
       creditCard: ['', [
         Validators.required
-      ]]
+      ]],
+      recurring: ['', []],
+      divide: ['', []],
+      installments: [ 1, [ Validators.min(1) ]]
     });
   }
 

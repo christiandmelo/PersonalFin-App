@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -53,6 +54,7 @@ import { TransactionTransferComponent } from './app/transaction/transaction-tran
     MatSelectModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatSlideToggleModule,
     MatCardModule,
     MatDialogModule,
     MatButtonModule,

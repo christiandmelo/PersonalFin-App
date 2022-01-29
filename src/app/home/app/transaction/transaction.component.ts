@@ -39,7 +39,8 @@ export class TransactionComponent implements OnInit {
     const dialogRef = this.dialog.open(TransactionEditingComponent, { data: {id: id, type: this.type} });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result != "")
+      console.log(result);
+      if(result != "" && result != undefined)
         this.getTransactions(this.page);
     });
   }
