@@ -23,6 +23,10 @@ export class CategoryService {
     return this.http.get<ApiResultCategories>(`${API}/categories?page=${page}&type=${type}`);
   }
 
+  getAllByType(type: number): Observable<ApiResultCategories>{
+    return this.http.get<ApiResultCategories>(`${API}/categories?type=${type}`);
+  }
+
   getById(id: number): Observable<ApiResultCategory>{
     return this.http.get<ApiResultCategory>(`${API}/category/${id}`);
   }

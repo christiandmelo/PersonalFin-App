@@ -2,8 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 import { TransactionService } from '../transaction.service';
+import { CategoryService } from '../../category/category.service';
+import { ApiResultCategories } from '../../category/category';
 
 export interface DialogData {
   id: number;
@@ -17,13 +20,15 @@ export interface DialogData {
 })
 export class TransactionEditingComponent implements OnInit {
   transactionForm!: FormGroup;
+  categories$ !: Observable<ApiResultCategories>;
 
   constructor(
     public dialogRef: MatDialogRef<TransactionEditingComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private trasactionService: TransactionService,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
+    private trasactionService: TransactionService,
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit(): void {
@@ -49,11 +54,20 @@ export class TransactionEditingComponent implements OnInit {
       creditCard: ['', [
         Validators.required
       ]],
+      useCreditCard: ['', []],
       recurring: ['', []],
       divide: ['', []],
       installments: [ 1, [ Validators.min(1) ]]
     });
+
+    this.getCategories();
   }
+
+  //#region Methods of get
+  getCategories(){
+    this.categories$ = this.categoryService.getAllByType(this.data.type)
+  }
+  //#endregion
 
   //#region methods for edition
   /*save(){

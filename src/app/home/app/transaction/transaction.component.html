@@ -16,7 +16,18 @@
             </mat-menu>
           </div>
           <div class="col-lg-6 col-5 text-right">
-            <a class="btn btn-sm btn-neutral" (click)="editionTransactionDialog(0)">New</a>
+            <a class="btn btn-sm btn-neutral" (click)="editionTransactionDialog(0, 1)">New <mat-icon class="red">trending_down</mat-icon></a>
+            <a class="btn btn-sm btn-neutral" (click)="editionTransactionDialog(0, 2)">New <mat-icon class="green">trending_up</mat-icon></a>
+            <a class="btn btn-sm btn-neutral" (click)="editionTransactionDialog(0, 3)">New <mat-icon class="blue">swap_horiz</mat-icon></a>
+            <!--<button mat-raised-button class="btn-type" [matMenuTriggerFor]="menuNew" #menuNew>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+              New
+            </button>
+            <mat-menu #menuNew="matMenuNew">
+              <button mat-menu-item (click)="editionTransactionDialog(1)"> <mat-icon class="red">trending_down</mat-icon> Expenses</button>
+              <button mat-menu-item (click)="editionTransactionDialog(2)"> <mat-icon class="green">trending_up</mat-icon> Incomes</button>
+              <button mat-menu-item (click)="editionTransactionDialog(3)"> <mat-icon class="blue">swap_horiz</mat-icon> Transfers</button>
+            </mat-menu>-->
           </div>
         </div>
         <!-- Card stats -->

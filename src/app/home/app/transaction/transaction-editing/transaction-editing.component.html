@@ -44,10 +44,14 @@
                 <mat-form-field appearance="outline" class="transaction-input">
                     <mat-label>Category</mat-label>
                     <mat-select formControlName="category" required>
-                        <mat-option>None</mat-option>
-                        <!--<mat-option *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
-                </mat-option>-->
+                        <div *ngIf="categories$ | async as categories; else emptyCategory">
+                            <mat-option *ngFor="let category of categories.data" [value]="category.id">
+                                {{category.name}}
+                            </mat-option>
+                        </div>
+                        <ng-template #emptyCategory>
+                            <mat-option>None</mat-option>
+                        </ng-template>
                     </mat-select>
                     <mat-error
                         *ngIf="transactionForm.get('category')?.errors?.required && transactionForm.get('category')?.touched">
@@ -55,6 +59,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+
 
             <div class="row">
                 <div class="col-md-6">

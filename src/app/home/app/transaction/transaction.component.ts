@@ -35,8 +35,8 @@ export class TransactionComponent implements OnInit {
   }
 
   //#region Methods of dialog
-  editionTransactionDialog(id: number) {
-    const dialogRef = this.dialog.open(TransactionEditingComponent, { data: {id: id, type: this.type} });
+  editionTransactionDialog(id: number, type: number) {
+    const dialogRef = this.dialog.open(TransactionEditingComponent, { data: {id: id, type: type} });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
