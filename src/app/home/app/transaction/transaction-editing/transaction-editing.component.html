@@ -63,13 +63,27 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <mat-slide-toggle color="primary" formControlName="recurring" class="transaction-input">
-                        Recurring expense
-                    </mat-slide-toggle>
+                    <mat-form-field appearance="outline" class="transaction-input">
+                        <mat-label>Payment</mat-label>
+                        <mat-select formControlName="payment">
+                            <div *ngIf="payments$ | async as payments; else emptyPayment">
+                                <mat-option *ngFor="let payment of payments.data" [value]="payment.id">
+                                    {{payment.name}}
+                                </mat-option>
+                            </div>
+                            <ng-template #emptyPayment>
+                                <mat-option>None</mat-option>
+                            </ng-template>
+                        </mat-select>
+                        <mat-error
+                            *ngIf="transactionForm.get('payment')?.errors?.required && transactionForm.get('payment')?.touched">
+                            Payment is required
+                        </mat-error>
+                    </mat-form-field>
                 </div>
                 <div class="col-md-6">
-                    <mat-slide-toggle color="primary" formControlName="useCreditCard" class="transaction-input">
-                        Credit card
+                    <mat-slide-toggle color="primary" formControlName="recurring" class="transaction-input">
+                        Recurring expense
                     </mat-slide-toggle>
                 </div>
             </div>

@@ -9,6 +9,8 @@ import { CategoryService } from '../../category/category.service';
 import { ApiResultCategories } from '../../category/category';
 import { BankService } from '../../bank/bank.service';
 import { ApiResultBanks } from '../../bank/bank';
+import { PaymentService } from '../../payment/payment.service';
+import { ApiResultPayments } from '../../payment/payment';
 
 export interface DialogData {
   id: number;
@@ -24,6 +26,7 @@ export class TransactionEditingComponent implements OnInit {
   transactionForm!: FormGroup;
   categories$ !: Observable<ApiResultCategories>;
   banks$ !: Observable<ApiResultBanks>;
+  payments$ !: Observable<ApiResultPayments>;
 
   constructor(
     public dialogRef: MatDialogRef<TransactionEditingComponent>,
@@ -32,6 +35,7 @@ export class TransactionEditingComponent implements OnInit {
     private snackBar: MatSnackBar,
     private trasactionService: TransactionService,
     private categoryService: CategoryService,
+    private paymentService: PaymentService,
     private bankService: BankService
   ) { }
 
@@ -58,7 +62,9 @@ export class TransactionEditingComponent implements OnInit {
       creditCard: ['', [
         Validators.required
       ]],
-      useCreditCard: ['', []],
+      payment: ['', [
+        Validators.required
+      ]],
       recurring: ['', []],
       divide: ['', []],
       installments: [ 1, [ Validators.min(1) ]]
@@ -66,6 +72,7 @@ export class TransactionEditingComponent implements OnInit {
 
     this.getCategories();
     this.getBanks();
+    this.getPayments();
   }
 
   //#region Methods of get
@@ -75,6 +82,10 @@ export class TransactionEditingComponent implements OnInit {
 
   getBanks(){
     this.banks$ = this.bankService.getAll()
+  }
+
+  getPayments(){
+    this.payments$ = this.paymentService.getAll()
   }
   //#endregion
 
