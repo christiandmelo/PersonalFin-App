@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 import { TransactionService } from '../transaction.service';
@@ -23,6 +23,7 @@ export interface DialogData {
   styleUrls: ['./transaction-editing.component.css']
 })
 export class TransactionEditingComponent implements OnInit {
+  color = "";
   transactionForm!: FormGroup;
   categories$ !: Observable<ApiResultCategories>;
   banks$ !: Observable<ApiResultBanks>;
@@ -40,6 +41,8 @@ export class TransactionEditingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setColor();
+
     this.transactionForm = this.formBuilder.group({
       description: ['', [
         Validators.required
@@ -67,7 +70,7 @@ export class TransactionEditingComponent implements OnInit {
       ]],
       recurring: ['', []],
       divide: ['', []],
-      installments: [ 1, [ Validators.min(1) ]]
+      installments: [1, [Validators.min(1)]]
     });
 
     this.getCategories();
@@ -76,16 +79,29 @@ export class TransactionEditingComponent implements OnInit {
   }
 
   //#region Methods of get
-  getCategories(){
+  getCategories() {
     this.categories$ = this.categoryService.getAllByType(this.data.type)
   }
 
-  getBanks(){
+  getBanks() {
     this.banks$ = this.bankService.getAll()
   }
 
-  getPayments(){
+  getPayments() {
     this.payments$ = this.paymentService.getAll()
+  }
+  //#endregion
+
+  //#region Methods of actions on screen
+  setColor() {
+    switch (this.data.type) {
+      case 1:
+        this.color = "red";
+        break;
+      case 2:
+        this.color = "green";
+        break;
+    }
   }
   //#endregion
 

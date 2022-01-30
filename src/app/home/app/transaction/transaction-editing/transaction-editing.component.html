@@ -7,6 +7,7 @@
                     <mat-form-field appearance="outline" class="transaction-input">
                         <mat-label>Description</mat-label>
                         <input matInput formControlName="description" required>
+                        <mat-icon matSuffix [ngClass]="color">description</mat-icon>
                         <mat-error
                             *ngIf="transactionForm.get('description')?.errors?.required && transactionForm.get('description')?.touched">
                             Description is required
@@ -18,8 +19,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <mat-form-field appearance="outline" class="transaction-input">
-                        <mat-label>Amount</mat-label>
+                        <mat-label>Amount</mat-label>                        
                         <input matInput formControlName="amount" required>
+                        <mat-icon matSuffix [ngClass]="color">attach_money</mat-icon>
                         <mat-error
                             *ngIf="transactionForm.get('amount')?.errors?.required && transactionForm.get('amount')?.touched">
                             Amount is required
@@ -30,7 +32,7 @@
                     <mat-form-field appearance="outline" class="transaction-input">
                         <mat-label>Issuance date</mat-label>
                         <input matInput formControlName="issuanceDate" [matDatepicker]="picker" required>
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker-toggle matSuffix [for]="picker" [ngClass]="color"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                         <mat-error
                             *ngIf="transactionForm.get('issuanceDate')?.errors?.required && transactionForm.get('issuanceDate')?.touched">
@@ -144,6 +146,7 @@
                     <mat-form-field appearance="outline" class="transaction-input">
                         <mat-label>Istallments</mat-label>
                         <input matInput formControlName="installments">
+                        <mat-icon matSuffix [ngClass]="color">call_split</mat-icon>
                         <mat-error
                             *ngIf="transactionForm.get('installments')?.errors?.min && transactionForm.get('installments')?.touched">
                             Installments minimum is 1
