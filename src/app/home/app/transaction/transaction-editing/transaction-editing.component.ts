@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { TransactionService } from '../transaction.service';
 import { CategoryService } from '../../category/category.service';
 import { ApiResultCategories } from '../../category/category';
+import { BankService } from '../../bank/bank.service';
+import { ApiResultBanks } from '../../bank/bank';
 
 export interface DialogData {
   id: number;
@@ -21,6 +23,7 @@ export interface DialogData {
 export class TransactionEditingComponent implements OnInit {
   transactionForm!: FormGroup;
   categories$ !: Observable<ApiResultCategories>;
+  banks$ !: Observable<ApiResultBanks>;
 
   constructor(
     public dialogRef: MatDialogRef<TransactionEditingComponent>,
@@ -28,7 +31,8 @@ export class TransactionEditingComponent implements OnInit {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private trasactionService: TransactionService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private bankService: BankService
   ) { }
 
   ngOnInit(): void {
@@ -61,11 +65,16 @@ export class TransactionEditingComponent implements OnInit {
     });
 
     this.getCategories();
+    this.getBanks();
   }
 
   //#region Methods of get
   getCategories(){
     this.categories$ = this.categoryService.getAllByType(this.data.type)
+  }
+
+  getBanks(){
+    this.banks$ = this.bankService.getAll()
   }
   //#endregion
 

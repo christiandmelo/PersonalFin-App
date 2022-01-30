@@ -79,7 +79,14 @@
                     <mat-form-field appearance="outline" class="transaction-input">
                         <mat-label>Bank</mat-label>
                         <mat-select formControlName="bank">
-                            <mat-option>None</mat-option>
+                            <div *ngIf="banks$ | async as banks; else emptyBank">
+                                <mat-option *ngFor="let bank of banks.data" [value]="bank.id">
+                                    {{bank.name}}
+                                </mat-option>
+                            </div>
+                            <ng-template #emptyBank>
+                                <mat-option>None</mat-option>
+                            </ng-template>
                         </mat-select>
                         <mat-error
                             *ngIf="transactionForm.get('bank')?.errors?.required && transactionForm.get('bank')?.touched">
