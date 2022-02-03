@@ -162,8 +162,8 @@
                   <td>{{transaction.statusId}}</td>
                   <td>{{transaction.issuanceDate | date:'dd/MM/YYYY'}}</td>
                   <td></td>
-                  <td>{{transaction.categoryId}}</td>
-                  <td>{{transaction.bankAccountId}}</td>            
+                  <td>{{transaction.categoryName}}</td>
+                  <td>{{transaction.bankAccouuntName}}</td>            
                   <td [ngClass]="{'red': transaction.typeEntry === 1, 'green': transaction.typeEntry === 2}" >
                     {{transaction.amount}}
                   </td>

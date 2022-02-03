@@ -13,9 +13,13 @@ export interface ApiResultTransactions {
   export interface Transaction {
     id: number;
     statusId: number;
+    statusName: string;
     bankAccountId: number;
+    bankAccouuntName: string;
     categoryId: number;
+    categoryName: string;
     paymentId: number;
+    paymentName: string;
     creditCardBillId: number;
     issuanceDate: Date;
     dueDate: Date;
