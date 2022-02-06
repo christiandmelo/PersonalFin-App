@@ -17,6 +17,8 @@ export class TransactionComponent implements OnInit {
   page : number = 0;
   type: number = 0;  
   date: Date = new Date();
+  dtBegin = "";
+  dtEnd = ""
   classBtnType = "btn-purple";
   textBtnType = "Transactions";
   textBtnButton = "";
@@ -30,7 +32,6 @@ export class TransactionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getTransactions(0);
     this.setMonth(0);
   }
 
@@ -39,7 +40,6 @@ export class TransactionComponent implements OnInit {
     const dialogRef = this.dialog.open(TransactionEditingComponent, { data: {id: id, type: type} });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if(result != "" && result != undefined)
         this.getTransactions(this.page);
     });
@@ -75,6 +75,11 @@ export class TransactionComponent implements OnInit {
   setMonth(direction:number){ 
     this.date.setMonth(this.date.getMonth() + direction);
     this.textBtnButton = this.monthNames[this.date.getMonth()] + " " + this.date.getFullYear().toString();
+
+    this.dtBegin = this.date.getFullYear().toString() + "-" + (this.date.getMonth()+1) + "-01";
+    this.dtEnd = this.date.getFullYear().toString() + "-" + (this.date.getMonth()+1) + "-" + new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
+
+    this.getTransactions(this.page);
   }
 
   changeMonth(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -86,11 +91,11 @@ export class TransactionComponent implements OnInit {
   //#region Methods of get
   getTransactions(page: number){
     if(this.type == 0){
-      this.transactions$ = this.transactionService.getAll(page);
+      this.transactions$ = this.transactionService.getAll(this.dtBegin, this.dtEnd, page);
       return;
     }
 
-    this.transactions$ = this.transactionService.getAllByType(page, this.type);
+    this.transactions$ = this.transactionService.getByDate(this.dtBegin, this.dtEnd, page, this.type);
   }
   //#endregion
 
