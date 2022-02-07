@@ -1,229 +1,263 @@
 <!-- header -->
 <div class="header bg-primary pb-6">
-    <div class="container-fluid">
-      <div class="header-body">
-        <div class="row align-items-center py-4">
-          <div class="col-lg-6 col-7">
-            <button mat-raised-button class="btn-type" [ngClass]="classBtnType" [matMenuTriggerFor]="menu" #menuTypeExpenses>
-              <mat-icon>keyboard_arrow_down</mat-icon>
-              {{textBtnType}}
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <button mat-raised-button class="btn-type" [ngClass]="classBtnType" [matMenuTriggerFor]="menu"
+            #menuTypeExpenses>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+            {{textBtnType}}
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="setType(0)">
+              <mat-icon class="purple">attach_money</mat-icon> Transactions
             </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="setType(0)"> <mat-icon class="purple">attach_money</mat-icon> Transactions</button>
-              <button mat-menu-item (click)="setType(1)"> <mat-icon class="red">trending_down</mat-icon> Expenses</button>
-              <button mat-menu-item (click)="setType(2)"> <mat-icon class="green">trending_up</mat-icon> Incomes</button>
-              <button mat-menu-item (click)="setType(3)"> <mat-icon class="blue">swap_horiz</mat-icon> Transfers</button>
-            </mat-menu>
-          </div>
-          <div class="col-lg-6 col-5 text-right">
-            <a class="btn btn-sm btn-neutral" (click)="editionTransactionDialog(0, 1)"><mat-icon class="red">trending_down</mat-icon></a>
-            <a class="btn btn-sm btn-neutral" (click)="editionTransactionDialog(0, 2)"><mat-icon class="green">trending_up</mat-icon></a>
-            <a class="btn btn-sm btn-neutral"><mat-icon class="blue">swap_horiz</mat-icon></a>
+            <button mat-menu-item (click)="setType(1)">
+              <mat-icon class="red">trending_down</mat-icon> Expenses
+            </button>
+            <button mat-menu-item (click)="setType(2)">
+              <mat-icon class="green">trending_up</mat-icon> Incomes
+            </button>
+            <button mat-menu-item (click)="setType(3)">
+              <mat-icon class="blue">swap_horiz</mat-icon> Transfers
+            </button>
+          </mat-menu>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <a class="btn btn-sm btn-neutral" (click)="editionTransactionDialog(0, 1)">
+            <mat-icon class="red">trending_down</mat-icon>
+          </a>
+          <a class="btn btn-sm btn-neutral" (click)="editionTransactionDialog(0, 2)">
+            <mat-icon class="green">trending_up</mat-icon>
+          </a>
+          <a class="btn btn-sm btn-neutral">
+            <mat-icon class="blue">swap_horiz</mat-icon>
+          </a>
+        </div>
+      </div>
+      <!-- Card stats -->
+      <div class="row" *ngIf="resumeTransactions$ | async as resumeTransactions;">
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Current balance</h5>
+                  <span class="h2 font-weight-bold mb-0">{{resumeTransactions.data.currentBalance}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-indigo text-white rounded-circle shadow">
+                    <i class="ni ni-money-coins"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-sm">
+                <span class="mr-2" [ngClass]="resumeTransactions.data.percentCurrentBalance ? 'text-success' : 'text-warning'">
+                  <i class="fa" [ngClass]="resumeTransactions.data.percentCurrentBalance ? 'fa-arrow-up' : 'fa-arrow-down'"></i> 
+                  {{resumeTransactions.data.percentCurrentBalance}}%
+                </span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
           </div>
         </div>
-        <!-- Card stats -->
-        <div class="row">
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Current balance</h5>
-                      <span class="h2 font-weight-bold mb-0">R$ 59,622.10</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-indigo text-white rounded-circle shadow">
-                        <i class="ni ni-money-coins"></i>
-                      </div>
-                    </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Incomes</h5>
+                  <span class="h2 font-weight-bold mb-0">{{resumeTransactions.data.incomes}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                    <i class="ni ni-bold-up"></i>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
                 </div>
               </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Incomes</h5>
-                      <span class="h2 font-weight-bold mb-0">R$ 6,668.53</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="ni ni-bold-up"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Expenses</h5>
-                      <span class="h2 font-weight-bold mb-0">R$ 4,118.79</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                        <i class="ni ni-bold-down"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="card card-stats">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Monthly balance</h5>
-                      <span class="h2 font-weight-bold mb-0">2,549.74</span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                        <i class="ni ni-chart-bar-32"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-warning mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
-                  </p>
-                </div>
-              </div>
+              <p class="mt-3 mb-0 text-sm">
+                <span class="mr-2" [ngClass]="resumeTransactions.data.percentIncomes ? 'text-success' : 'text-warning'">
+                  <i class="fa" [ngClass]="resumeTransactions.data.percentIncomes ? 'fa-arrow-up' : 'fa-arrow-down'"></i> 
+                  {{resumeTransactions.data.percentIncomes}}%
+                </span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
             </div>
           </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Expenses</h5>
+                  <span class="h2 font-weight-bold mb-0">{{resumeTransactions.data.expenses}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                    <i class="ni ni-bold-down"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-sm">
+                <span class="mr-2" [ngClass]="resumeTransactions.data.percentExpenses ? 'text-warning' : 'text-success'">
+                  <i class="fa" [ngClass]="resumeTransactions.data.percentExpenses ? 'fa-arrow-up' : 'fa-arrow-down'"></i> 
+                  {{resumeTransactions.data.percentExpenses}}%
+                </span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card card-stats">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Monthly balance</h5>
+                  <span class="h2 font-weight-bold mb-0">{{resumeTransactions.data.monthBalance}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                    <i class="ni ni-chart-bar-32"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="mt-3 mb-0 text-sm">
+                <span class="mr-2" [ngClass]="resumeTransactions.data.positiveMonthBalance ? 'text-success' : 'text-warning'">
+                  <i class="fa" [ngClass]="resumeTransactions.data.positiveMonthBalance ? 'fa-arrow-up' : 'fa-arrow-down'"></i> 
+                  {{resumeTransactions.data.percentMonthBalance}}%
+                </span>
+                <span class="text-nowrap">Since last month</span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
-  <!-- Page content -->
-  <div class="container-fluid mt--6">
-    <div class="row">
-      <div class="col">
-        <div class="card" >
-          <!-- Card header -->
-          <div class="card-header border-0">
-              <div class="row">
+</div>
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+          <div class="row">
             <div class="col-6">
-                <h3 class="mb-0">Transactions</h3>
+              <h3 class="mb-0">Transactions</h3>
             </div>
             <div class="col-6">
-                <nav aria-label="...">
-                    <ul class="pagination justify-content-end mb-0">
-                        <li class="page-item">
-                        <a class="page-link" (click)="setMonth(-1)">
-                            <i class="fas fa-angle-left"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        </li>
-                        <li class="page-item active agroupMonth">
-                          <a class="month">{{textBtnButton}}</a>
-                          <input disabled class="month inputDatePickMonth" matInput [matDatepicker]="picker" (dateChange)="changeMonth('change', $event)"/>
-                          <mat-datepicker-toggle class="datePickerMonth" matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-datepicker #picker disabled="false"></mat-datepicker>
-                        </li>
-                        <li class="page-item">
-                        <a class="page-link" (click)="setMonth(1)">
-                            <i class="fas fa-angle-right"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+              <nav aria-label="...">
+                <ul class="pagination justify-content-end mb-0">
+                  <li class="page-item">
+                    <a class="page-link" (click)="setMonth(-1)">
+                      <i class="fas fa-angle-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active agroupMonth">
+                    <a class="month">{{textBtnButton}}</a>
+                    <input disabled class="month inputDatePickMonth" matInput [matDatepicker]="picker"
+                      (dateChange)="changeMonth('change', $event)" />
+                    <mat-datepicker-toggle class="datePickerMonth" matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" (click)="setMonth(1)">
+                      <i class="fas fa-angle-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
-          <!-- Light table -->
-          <div class="table-responsive">
-            <table class="table align-items-center table-flush" *ngIf="transactions$ | async as transactions; else emptyTable">
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush"
+            *ngIf="transactions$ | async as transactions; else emptyTable">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="sort" *ngFor="let column of displayedColumns">{{column}}</th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              <tr *ngFor="let transaction of transactions.data">
+                <td>{{transaction.statusId}}</td>
+                <td>{{transaction.issuanceDate | date:'dd/MM/YYYY'}}</td>
+                <td></td>
+                <td>{{transaction.categoryName}}</td>
+                <td>{{transaction.bankAccouuntName}}</td>
+                <td [ngClass]="{'red': transaction.typeEntry === 1, 'green': transaction.typeEntry === 2}">
+                  {{transaction.amount}}
+                </td>
+                <td scope="row">
+                  <div class="media align-items-center">
+                    <a class="rounded-circle mr-3" (click)="editionTransactionDialog(transaction.id)">
+                      <img alt="Edit" src="../../../../assets/img/edit.png">
+                    </a>
+                    <a class="rounded-circle mr-3">
+                      <img alt="Delete" src="../../../../assets/img/delete.png">
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="7">
+                  <nav aria-label="...">
+                    <ul class="pagination justify-content-end mb-0">
+                      <li class="page-item" [ngClass]="{'disabled': transactions.page === 0}">
+                        <a class="page-link" (click)="previousPage()">
+                          <i class="fas fa-angle-left"></i>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+                      <li class="page-item active">
+                        <span class="page-link">{{transactions.page+1}}</span>
+                      </li>
+                      <li class="page-item"
+                        [ngClass]="{'disabled': transactions.data.length < transactions.itemsPerPage}">
+                        <a class="page-link" (click)="nextPage()">
+                          <i class="fas fa-angle-right"></i>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <!-- Empty table -->
+          <ng-template #emptyTable>
+            <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col" class="sort" *ngFor="let column of displayedColumns" >{{column}}</th>
+                  <th scope="col" class="sort" *ngFor="let column of displayedColumns">{{column}}</th>
                 </tr>
               </thead>
               <tbody class="list">
-                <tr *ngFor="let transaction of transactions.data">
-                  <td>{{transaction.statusId}}</td>
-                  <td>{{transaction.issuanceDate | date:'dd/MM/YYYY'}}</td>
-                  <td></td>
-                  <td>{{transaction.categoryName}}</td>
-                  <td>{{transaction.bankAccouuntName}}</td>            
-                  <td [ngClass]="{'red': transaction.typeEntry === 1, 'green': transaction.typeEntry === 2}" >
-                    {{transaction.amount}}
-                  </td>
-                  <td scope="row">
-                    <div class="media align-items-center">
-                      <a class="rounded-circle mr-3" (click)="editionTransactionDialog(transaction.id)">
-                        <img alt="Edit" src="../../../../assets/img/edit.png">
-                      </a>
-                      <a class="rounded-circle mr-3">
-                        <img alt="Delete" src="../../../../assets/img/delete.png">
-                      </a>
-                    </div>
-                  </td>
+                <tr>
+                  <td colspan="7">...</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
-                  <td colspan="7">
-                    <nav aria-label="...">
-                      <ul class="pagination justify-content-end mb-0">
-                        <li class="page-item" [ngClass]="{'disabled': transactions.page === 0}">
-                          <a class="page-link" (click)="previousPage()">
-                            <i class="fas fa-angle-left"></i>
-                            <span class="sr-only">Previous</span>
-                          </a>
-                        </li>
-                        <li class="page-item active">
-                          <span class="page-link">{{transactions.page+1}}</span>
-                        </li>
-                        <li class="page-item" [ngClass]="{'disabled': transactions.data.length < transactions.itemsPerPage}">
-                          <a class="page-link" (click)="nextPage()">
-                            <i class="fas fa-angle-right"></i>
-                            <span class="sr-only">Next</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </nav>
-                  </td>
+                  <td colspan="7"></td>
                 </tr>
               </tfoot>
             </table>
-
-            <!-- Empty table -->
-            <ng-template #emptyTable >
-                <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col" class="sort" *ngFor="let column of displayedColumns" >{{column}}</th>
-                        </tr>
-                    </thead>
-                    <tbody class="list">
-                        <tr><td colspan="7">...</td></tr>
-                    </tbody>
-                    <tfoot>
-                        <tr><td colspan="7"></td></tr>
-                    </tfoot>
-                </table>
-            </ng-template>
-          </div>
+          </ng-template>
         </div>
       </div>
     </div>
   </div>
+</div>

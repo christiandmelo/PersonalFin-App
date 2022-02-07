@@ -28,3 +28,25 @@ export interface ApiResultTransactions {
     debitedAmount: number;
     typeEntry: number;
   };
+
+  export interface ApiResultResumeTransaction {
+    success: boolean,
+    page: number,
+    itemsPerPage: number,
+    data: Array <ResumeTransaction>
+  }
+  
+  export interface ResumeTransaction {
+    currentBalance: string;
+    percentCurrentBalance: string;
+    positiveCurrentBalance: boolean;
+    incomes: string;
+    positiveIncomes: boolean;
+    expenses: string;
+    positiveExpenses: boolean;
+    monthBalance: string;
+    positiveMonthBalance: string;
+    percentIncomes: string;
+    percentExpenses: string;
+    percentMonthBalance: string;
+  };

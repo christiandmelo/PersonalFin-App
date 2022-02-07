@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
-import { ApiResultTransactions } from './transaction';
+import { ApiResultResumeTransaction, ApiResultTransactions } from './transaction';
 import { TransactionService } from './transaction.service';
 import { TransactionEditingComponent } from './transaction-editing/transaction-editing.component';
 
@@ -14,6 +14,7 @@ import { TransactionEditingComponent } from './transaction-editing/transaction-e
 })
 export class TransactionComponent implements OnInit {
   transactions$ !: Observable<ApiResultTransactions>;
+  resumeTransactions$ !: Observable<ApiResultResumeTransaction>;
   page : number = 0;
   type: number = 0;  
   date: Date = new Date();
@@ -40,8 +41,10 @@ export class TransactionComponent implements OnInit {
     const dialogRef = this.dialog.open(TransactionEditingComponent, { data: {id: id, type: type} });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result != "" && result != undefined)
+      if(result != "" && result != undefined){
+        this.getResumeTransactions();
         this.getTransactions(this.page);
+      }
     });
   }
 
@@ -79,6 +82,7 @@ export class TransactionComponent implements OnInit {
     this.dtBegin = this.date.getFullYear().toString() + "-" + (this.date.getMonth()+1) + "-01";
     this.dtEnd = this.date.getFullYear().toString() + "-" + (this.date.getMonth()+1) + "-" + new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
 
+    this.getResumeTransactions();
     this.getTransactions(this.page);
   }
 
@@ -96,6 +100,10 @@ export class TransactionComponent implements OnInit {
     }
 
     this.transactions$ = this.transactionService.getByDate(this.dtBegin, this.dtEnd, page, this.type);
+  }
+
+  getResumeTransactions(){
+    this.resumeTransactions$ = this.transactionService.getResume(this.dtBegin, this.dtEnd);
   }
   //#endregion
 

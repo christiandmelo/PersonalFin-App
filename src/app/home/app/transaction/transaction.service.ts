@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { ApiResultTransactions, ApiResultTransaction, Transaction } from './transaction';
+import { ApiResultTransactions, ApiResultTransaction, Transaction, ApiResultResumeTransaction } from './transaction';
 
 const API = environment.apiURL;
 
@@ -24,5 +24,9 @@ export class TransactionService {
 
   getById(id: number): Observable<ApiResultTransaction>{
     return this.http.get<ApiResultTransaction>(`${API}/entry/${id}`);
+  }
+
+  getResume(dtBegin: string, dtEnd: string,): Observable<ApiResultResumeTransaction>{
+    return this.http.get<ApiResultResumeTransaction>(`${API}/entries/resume/${dtBegin}/${dtEnd}`);
   }
 }
