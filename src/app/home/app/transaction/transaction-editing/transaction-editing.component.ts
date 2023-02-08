@@ -106,6 +106,7 @@ export class TransactionEditingComponent implements OnInit {
   //#endregion
 
   //#region methods for edition
+  save(){}
   /*save(){
     if(this.data.id <= 0){
       this.saveNew();

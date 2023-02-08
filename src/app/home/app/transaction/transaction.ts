@@ -33,7 +33,7 @@ export interface ApiResultTransactions {
     success: boolean,
     page: number,
     itemsPerPage: number,
-    data: Array <ResumeTransaction>
+    data: ResumeTransaction
   }
   
   export interface ResumeTransaction {
